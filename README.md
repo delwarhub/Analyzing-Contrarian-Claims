@@ -1,72 +1,72 @@
+# CARDS: Computer-assisted recognition of (climate change) denial and skepticism
 
-# Climate Change Misinformation Analysis on Reddit
+This repository makes available the training data and main code used to train the classifer described in the following [paper](https://osf.io/preprints/socarxiv/crxfm/):
 
-This project focuses on analyzing contrarian claims related to climate change on Reddit. The project uses both supervised classification models (trained on the CARDs dataset) and unsupervised topic modeling (LDA and BERTopic) to extract insights and themes. The combination of these techniques helps in understanding the framing and spread of misinformation.
+    "Computer-assisted detection and classification of misinformation about climate change" 
+    by Travis G. Coan, Constantine Boussalis, John Cook, and Mirjam Nanko.
 
-## Project Structure
+## Data
 
+The data used in the paper is available [here](https://drive.google.com/uc?export=download&id=14exmlYCT3-K2byYHFFrShAIYiemJQroi). After unzipping the file, you will find a data directory with two subfolders:
+
+* `analysis/`: Data to replicate the main analysis in the paper.
+* `training/`:  Data used to train and test the classifer developed in the paper.
+
+## Code
+
+While we imagine that most people will want to download the training data and roll their own classifer, we also provide the code used to train and test the model presented in the paper. To use this code, start by creating and attaching a Python virtual environment:
+
+`python -m venv env`
+
+`source env/bin/activate`
+
+And then pip install the project requirements:
+
+`pip install -r requirements.txt`
+
+Note that we use `spaCy`'s `en_core_web_lg` (778.7M zipped) to tokenize the text, which be downloaded automatically as a requirement. If you want to avoid this, you can remove it from the `requirements.txt` and edit the `preprocess.py` script accordingly.
+
+### Fitting the RoBERTa-Logistic ensemble classifer
+
+As described more fully in the paper, our model uses a simple ensemble of a logistic classifier and the [RoBERTa](https://arxiv.org/abs/1907.11692) architecture.
+
+#### RoBERTa
+
+We used the fantastic `simpletransformers` library to train, test, and perform inference for the RoBERTa side of our model. For more on how to install the `simpletransformers` library, please see:
+
+https://simpletransformers.ai/docs/installation/
+
+The `roberta/` subdirectory contains the code to fit and evaluate the model. Specifically, directory includes the following 3 Jupyter notebooks which walk you through the process:
+
+* `cards_training.ipynb`: Includes the code (and, importantly, the hyperparameters) used to fit the CARDS model.
+* `cards_evaluation.ipynb`: Provides the code to evaluate the model performance on held-out data.
+* `cards_inference.ipynb`: Provides code to infer classes in unseen data.
+
+#### Logistic classifer
+
+To run the logistic side of the model, you can use the following process:
+
+```python
+from utils import read_csv
+import preprocess as pp
+from fit.logistic import fit_logistic_classifier
+
+# Read in downloaded training data
+data = read_csv("data/training/training.csv", remove_header=True)
+
+# Clean and tokenize. Uses unthreaded spaCy, so it is slow!
+tokens = [[pp.tokenize(pp.denoise_text(row[0]), remove_stops=True), row[1]] for row in data]
+
+# Fit the model
+model = fit_logistic_classifier(tokens)
 ```
-├── cards_training.ipynb        # Model training and classification using the CARDs dataset.
-├── cards_evaluation.ipynb       # Evaluation of trained classification models.
-├── cards_inference.ipynb        # Running inference on new Reddit data.
-├── Prepare CSV.ipynb            # Preprocessing of raw Reddit data into clean CSV format.
-├── topic_modeling.ipynb         # LDA and BERTopic topic modeling.
-├── topic_modeling_reddit.ipynb  # Focused topic modeling for Reddit data.
-├── ensemble.py                  # Ensemble classification implementation.
-├── logistic.py                  # Logistic regression classification implementation.
-├── README.md                    # Project documentation (this file).
-```
 
-## Steps
+The model dictionary holds the trained model, vectorizer, and label encoder (`help(fit_logistic_classifer)`).
 
-### 1. Data Preparation
-   - **Script:** `Prepare CSV.ipynb`
-   - **Description:** This notebook is responsible for cleaning and preprocessing the raw Reddit dataset. The key steps include:
-     - Removing unnecessary characters and links.
-     - Text normalization (lowercasing, removing stop words, etc.).
-     - Outputting a cleaned CSV file, ready for further analysis.
+### Pre-trained model weights
 
-### 2. Model Training
-   - **Script:** `cards_training.ipynb`
-   - **Description:** This notebook trains supervised machine learning models using the CARDs dataset to classify Reddit posts into predefined contrarian categories. Key steps include:
-     - Loading and exploring the CARDs dataset.
-     - Applying various text vectorization techniques (TF-IDF, Word2Vec).
-     - Training different machine learning classifiers (e.g., Logistic Regression, Ensemble models).
+The pre-trained model weights for the RoBERTa (and logistic) model used in the paper are available [here](https://drive.google.com/uc?export=download&id=1cbASuoLNY-kJcm7hUFLTGYzblZFzxaVo). Note that this file is large (3.5G zipped) -- sorry!
 
-### 3. Model Evaluation
-   - **Script:** `cards_evaluation.ipynb`
-   - **Description:** This notebook evaluates the performance of the trained models. Key evaluation metrics such as accuracy, F1-score, precision, and recall are computed. The steps include:
-     - Loading test data.
-     - Predicting the labels on test data using trained models.
-     - Generating classification reports and confusion matrices.
 
-### 4. Inference on New Reddit Data
-   - **Script:** `cards_inference.ipynb`
-   - **Description:** This notebook is used for running predictions on new, unseen Reddit data using the trained models. The process involves:
-     - Loading new Reddit data.
-     - Preprocessing the text data.
-     - Predicting contrarian categories for each Reddit post.
 
-### 5. Topic Modeling
-   - **Script:** `topic_modeling.ipynb`
-   - **Description:** This notebook applies two topic modeling techniques, LDA and BERTopic, to identify key themes in the Reddit data. Steps include:
-     - Running LDA to discover 10–20 key topics.
-     - Using BERTopic for context-rich topic extraction.
-     - Assigning topics to each Reddit post and analyzing the results.
 
-### 6. Reddit-Specific Topic Modeling
-   - **Script:** `topic_modeling_reddit.ipynb`
-   - **Description:** A more focused version of topic modeling, specifically analyzing Reddit discussions around climate change. The steps include:
-     - Loading cleaned Reddit data.
-     - Applying LDA and BERTopic on the Reddit dataset.
-     - Analyzing dominant topics and their relevance to misinformation.
-
-### 7. Ensemble and Logistic Regression Models
-   - **Script:** `ensemble.py`, `logistic.py`
-   - **Description:** These Python scripts implement the machine learning models used in classification tasks:
-     - **ensemble.py:** Contains the code for ensemble models used for classification.
-     - **logistic.py:** Implements logistic regression for classifying Reddit posts.
-
-## Conclusion
-
-This project provides a comprehensive approach to understanding the spread and nature of climate change misinformation on Reddit through both classification and topic modeling. The combination of these methods helps to uncover the themes and framing used in contrarian claims and how misinformation is propagated on social media.
