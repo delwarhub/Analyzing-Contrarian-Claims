@@ -6,21 +6,21 @@ This project focuses on analyzing contrarian claims related to climate change on
 
 ```
 Climate-Change-Misinformation-Reddit/
-├── data/                               # Contains a few extracted from the original Reddit datasets related my 
+├── data/                              
 │   ├── Mapped_Topic.csv          
-├── training/                           # Folder to store raw, intermediate, and processed data
+├── training/                          
 │   ├── test.csv          
 │   ├── training.csv      
 │   ├── valid.csv               
-├── notebooks/                          # Folder containing Jupyter notebooks
-│   ├── cards_training.ipynb            # Notebook for training classification models
-│   ├── cards_evaluation.ipynb          # Notebook for evaluating models
-│   ├── cards_inference.ipynb           # Notebook for running inference on new data
-│   ├── topic_modeling_reddit.ipynb     # Reddit-specific topic modeling notebook
-├── output/                             # Folder for storing output results like model predictions, reports
-│   ├── predictions/                    # Subfolder for storing prediction results
-│   │   ├── reddit_predictions.csv      # Predictions on Reddit posts
-│   └── reports/                        # Subfolder for storing evaluation reports
+├── notebooks/                         
+│   ├── cards_training.ipynb           
+│   ├── cards_evaluation.ipynb         
+│   ├── cards_inference.ipynb          
+│   ├── topic_modeling_reddit.ipynb     
+├── output/                             
+│   ├── predictions/                   
+│   │   ├── reddit_predictions.csv     
+│   └── reports/                     
 │       ├── BERT Cosine Similarity.png   
 │       ├── Distribution of cosine similarity scores for each technique.png
 │       ├── Manual Inspection.png     
@@ -28,7 +28,7 @@ Climate-Change-Misinformation-Reddit/
 │       ├── Percentage of Rows with Cosine Similarity (BERT) _ 0.5 by Mapped Claim.png       
 │       ├── TF-IDF Cosine Similarity.png       
 │       ├── Word2Vec Cosine Similarity.png        
-├── README.md                           # Project documentation
+├── README.md                        
 
 ```
 
