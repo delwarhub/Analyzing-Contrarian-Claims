@@ -57,7 +57,7 @@ Climate-Change-Misinformation-Reddit/
 
 ### 3. Model Evaluation
    - **Script:** `cards_evaluation.ipynb`
-   - **Description:** The pre-trained model weights for the RoBERTa (and logistic) model used in the paper are available [here](https://drive.google.com/uc?export=download&id=1cbASuoLNY-kJcm7hUFLTGYzblZFzxaVo)! This notebook evaluates the performance of the trained models. In the base project used the fantastic `simpletransformers` library to train, test, and perform inference for the RoBERTa side of their model. For more on how to install the `simpletransformers` library, please see:  [here](https://simpletransformers.ai/docs/installation/). Key evaluation metrics such as accuracy, F1-score, precision, and recall are computed. The steps include:
+   - **Description:** The pre-trained model weights for the RoBERTa model used in the paper are available [here](https://drive.google.com/uc?export=download&id=1cbASuoLNY-kJcm7hUFLTGYzblZFzxaVo)! This notebook evaluates the performance of the trained models. The project used the fantastic `simpletransformers` library to train, test, and perform inference for the RoBERTa side of their model. For more on how to install the `simpletransformers` library, please see [here](https://simpletransformers.ai/docs/installation/). Key evaluation metrics such as accuracy, F1-score, precision, and recall are computed. The steps include:
      - Loading test data.
      - Provides the code to evaluate the model performance on held-out data.
      - Predicting the labels on test data using trained models.
