@@ -63,17 +63,11 @@ Climate-Change-Misinformation-Reddit/
      - Predicting the labels on test data using trained models.
      - Generating classification reports and confusion matrices.
 
-### 4 . Topic Modeling
-   - **Script:** `topic_modeling.ipynb`
-   - **Description:** This notebook applies two topic modeling techniques, LDA and BERTopic, to identify key themes in the Reddit data. Steps include:
-     - Running LDA to discover 10–20 key topics.
-     - Using BERTopic for context-rich topic extraction.
-     - Assigning topics to each Reddit post and analyzing the results.
-
-### 5. Reddit-Specific Topic Modeling
+### 4. Reddit-Specific Topic Modeling
    - **Script:** `topic_modeling_reddit.ipynb`
-   - **Description:** A more focused version of topic modeling, specifically analyzing Reddit discussions around climate change. The steps include:
+   - **Description:** This notebook applies two topic modeling techniques, LDA and BERTopic, to identify key themes in the Reddit data. Steps include:
      - Loading cleaned Reddit data.
+     - Running LDA to discover 17 key topics.
      - Applying LDA and BERTopic on the Reddit dataset.
      - Analyzing dominant topics and their relevance to misinformation.
 
