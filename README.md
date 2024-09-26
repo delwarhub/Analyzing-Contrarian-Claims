@@ -12,7 +12,7 @@ Climate-Change-Misinformation-Reddit/
 │   ├── test.csv          
 │   ├── training.csv      
 │   ├── valid.csv               
-├── notebooks/                         
+├── roberta/                         
 │   ├── cards_training.ipynb           
 │   ├── cards_evaluation.ipynb         
 │   ├── cards_inference.ipynb          
