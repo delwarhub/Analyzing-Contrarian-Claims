@@ -48,30 +48,30 @@ Climate-Change-Misinformation-Reddit/
    - **Description:** This notebook trains supervised machine learning models using the CARDs dataset to classify Reddit posts into predefined contrarian categories. The dataset used in this process is available [here](https://drive.google.com/uc?export=download&id=14exmlYCT3-K2byYHFFrShAIYiemJQroi). After unzipping the file, you will find a data directory with two subfolders:
      - `analysis/`: Data replicating the base paper's main analysis.
      - `training/`: Data used to train and test the classifier developed in the paper.
-
-   Key steps include:
-     - Loading and exploring the CARDs dataset.
-     - Applying various text vectorization techniques (TF-IDF, Word2Vec).
-     - Including the code (and hyperparameters) used to fit the CARDS model.
-     - Training different machine learning classifiers (e.g., Logistic Regression, Ensemble models).
+       
+      Key steps include:
+      - Loading and exploring the CARDs dataset.
+      - Applying various text vectorization techniques (TF-IDF, Word2Vec).
+      - Including the code (and hyperparameters) used to fit the CARDS model.
+      - Training different machine learning classifiers (e.g., Logistic Regression, Ensemble models).
 
 ### 3. Model Evaluation
    - **Script:** `cards_evaluation.ipynb`
-   - **Description:** The pre-trained model weights for the RoBERTa model used in the paper are available [here](https://drive.google.com/uc?export=download&id=1cbASuoLNY-kJcm7hUFLTGYzblZFzxaVo). This notebook evaluates the performance of the trained models. The project uses the `simpletransformers` library to train, test, and perform inference for the RoBERTa side of the model. For installation instructions on the `simpletransformers` library, refer to [here](https://simpletransformers.ai/docs/installation/). 
+   - **Description:** The pre-trained model weights for the RoBERTa model used in the paper are available [here](https://drive.google.com/uc?export=download&id=1cbASuoLNY-kJcm7hUFLTGYzblZFzxaVo). This notebook evaluates the performance of the trained models. The project uses the `simpletransformers` library to train, test, and perform inference for the RoBERTa side of the model. For installation instructions on the `simpletransformers` library, refer to [here](https://simpletransformers.ai/docs/installation/).
 
-   Key evaluation metrics, such as accuracy, F1-score, precision, and recall, are computed. The steps include:
-     - Loading test data.
-     - Providing code to evaluate model performance on held-out data.
-     - Predicting labels on test data using the trained models.
-     - Generating classification reports and confusion matrices.
+     Key evaluation metrics, such as accuracy, F1-score, precision, and recall, are computed. The steps include:
+      - Loading test data.
+      - Providing code to evaluate model performance on held-out data.
+      - Predicting labels on test data using the trained models.
+      - Generating classification reports and confusion matrices.
 
 ### 4. Reddit-Specific Topic Modeling
    - **Script:** `topic_modeling_reddit.ipynb`
    - **Description:** This notebook applies two topic modeling techniques, LDA and BERTopic, to identify key themes in the Reddit data. The steps include:
-     - Loading cleaned Reddit data.
-     - Running LDA to discover 17 key topics.
-     - Applying LDA and BERTopic on the Reddit dataset.
-     - Analyzing dominant topics and their relevance to misinformation.
+      - Loading cleaned Reddit data.
+      - Running LDA to discover 17 key topics.
+      - Applying LDA and BERTopic on the Reddit dataset.
+      - Analyzing dominant topics and their relevance to misinformation.
 
 ## Conclusion
 
@@ -81,5 +81,3 @@ This project provides a comprehensive approach to understanding the spread and n
 
 This repository makes available the training data and main code used to train the classifier described in the following [paper](https://osf.io/preprints/socarxiv/crxfm/):
 1. "Computer-assisted detection and classification of misinformation about climate change" by Travis G. Coan, Constantine Boussalis, John Cook, and Mirjam Nanko.
-
-
